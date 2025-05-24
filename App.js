@@ -3,6 +3,10 @@
 * <h1>I am H1 tag</h1> 
  <h2>I am H2 tag</h2> 
  </div>
+ <div id="child2">
+* <h1>I am child2 H1 tag</h1> 
+ <h2>I am child2 H2 tag</h2> 
+ </div>
  </div> */
 
 const parent = React.createElement("div", { id: "parent" }, [
