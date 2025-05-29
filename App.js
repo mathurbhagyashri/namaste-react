@@ -1,32 +1,53 @@
-/* <div id="parent">
-<div id="child">
-* <h1>I am H1 tag</h1> 
- <h2>I am H2 tag</h2> 
- </div>
- <div id="child2">
-* <h1>I am child2 H1 tag</h1> 
- <h2>I am child2 H2 tag</h2> 
- </div>
- </div> */
+import React from "react";
+import ReactDOM from "react-dom/client";
 
-const parent = React.createElement("div", { id: "parent" }, [
-  React.createElement("div", { id: "child" }, [
-    React.createElement("h1", { id: "heading" }, "I am h1 tag "),
-    React.createElement("h2", { id: "heading" }, "h2 tag "),
-  ]),
-  React.createElement("div", { id: "child2" }, [
-    React.createElement("h1", { id: "newText" }, "i am child2"),
-    React.createElement("h1", { id: "newText" }, "i am child2's sibling"),
-  ]),
-]);
-
+// React.createElement => ReactELement -JS Object => HTMLElement(render)
 const heading = React.createElement(
   "h1",
   { id: "heading" },
-  "learning React episode 1"
+  "next chapter new begining"
 );
+console.log(heading);
 
-console.log(parent);
+// jsx - html inside javascript or html like syntax
+// jsx( transpiled before reaches to js engine)- parcel-- babel
+
+// JSX => Babel transpiles it to React.createElement => ReactELement -JS Object => HTMLElement(render)
+const elem= <span>ELEMENT</span>
+const jsxHeading = (
+  <>
+    <h1 className="head" tabIndex="2" id="heading">
+    Namaste react using JSX ❤️
+  </h1>
+  {elem}
+  </>
+);
+console.log(jsxHeading);
+
+const Title=()=>(
+    <h1> title check ❤️❤️ </h1>
+)
+
+const name= 'bhagyashri'
+
+// React functional component
+// adding Title component into HeadingComponent == component composition
+const HeadingComponent = () => (
+  <div id="container">
+    <h1>React functional component by {name}</h1>
+    <Home/>
+    {jsxHeading}    
+    <Title/>
+    {Title()}
+  </div>
+)
+
+
+
+const Home=()=>(
+     <h1>Home landing page</h1>
+)
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(parent);
+
+root.render(<HeadingComponent />); //like this functional component render
