@@ -47,6 +47,11 @@
 .res-logo {
   width: 100%;
 }
+.filter-btn{
+  margin: 10px;
+  background-color: greenyellow;
+  cursor: pointer;
+}
 
 .footer {
   display: flex;
