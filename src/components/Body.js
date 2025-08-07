@@ -4,13 +4,16 @@ import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 
 export const Body = () => {
-  console.log("searender");
+
 
   // local state variable - super powerful variable to create state
   const [listsOfRestaurants, setListsOfRestaurants] = useState([]);
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
 
   const [searchtext, setSearchText] = useState("");
+
+  // whenever state variable update, react triggers a reconcillation cycle (re-renders the component)
+    console.log("Body render");
 
   useEffect(() => {
     fetchData();
@@ -19,6 +22,7 @@ export const Body = () => {
   const fetchData = async () => {
     const data = await fetch(
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9352403&lng=77.624532&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      //  "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9352403&lng=77.624532&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
 
     const json = await data.json();
@@ -64,8 +68,7 @@ export const Body = () => {
           className="filter-btn"
           onClick={() => {
             const filteredList = listsOfRestaurants.filter(
-              (res) => res.info.avgRating >4
-            );
+              (res) => res.info.avgRating >4.3            );
             console.log("filteredList89988", filteredList);
            setFilteredRestaurant(filteredList);
           }}
