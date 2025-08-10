@@ -57,7 +57,11 @@
   justify-content: space-evenly;
   border: 1px solid black;
   padding: 15px;
-  align-items: end;
+  align-items: flex-end;
+  margin-bottom: 0px;
+    position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
 .shimmer-container{

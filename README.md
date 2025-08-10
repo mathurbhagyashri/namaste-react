@@ -38,3 +38,7 @@ will get it IN NODE MODULE ON npm i
 (normal JS utility function)
 -useState()
 -useEffect()
+
+# 2 types of Routing in webapps
+-Client side routing
+-server side routing

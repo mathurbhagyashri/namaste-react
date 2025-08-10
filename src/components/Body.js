@@ -1,11 +1,9 @@
-import  RestaurantCard  from "./RestaurantCard";
+import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
-// import resLists from "../utils/mockData";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
-export const Body = () => {
-
-
+ const  Body = () => {
   // local state variable - super powerful variable to create state
   const [listsOfRestaurants, setListsOfRestaurants] = useState([]);
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
@@ -13,7 +11,7 @@ export const Body = () => {
   const [searchtext, setSearchText] = useState("");
 
   // whenever state variable update, react triggers a reconcillation cycle (re-renders the component)
-    console.log("Body render");
+  console.log("Body render");
 
   useEffect(() => {
     fetchData();
@@ -28,11 +26,17 @@ export const Body = () => {
     const json = await data.json();
     console.warn("json data api", json);
 
-        console.warn("ready", json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-);
+    console.warn(
+      "ready",
+      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
 
-   setListsOfRestaurants(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-    setFilteredRestaurant(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setListsOfRestaurants(
+      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+    setFilteredRestaurant(
+      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
   };
 
   if (listsOfRestaurants.length === 0) {
@@ -68,9 +72,10 @@ export const Body = () => {
           className="filter-btn"
           onClick={() => {
             const filteredList = listsOfRestaurants.filter(
-              (res) => res.info.avgRating >4.3            );
+              (res) => res.info.avgRating > 4.3
+            );
             console.log("filteredList89988", filteredList);
-           setFilteredRestaurant(filteredList);
+            setFilteredRestaurant(filteredList);
           }}
         >
           Top Rated Restaurants
@@ -78,9 +83,13 @@ export const Body = () => {
       </div>
       <div className="res-container">
         {filteredRestaurant.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+          <Link key={restaurant.info.id} to={"/restaurants/" + restaurant.info.id}>
+            <RestaurantCard resData={restaurant} />
+          </Link>
         ))}
       </div>
     </div>
   );
 };
+
+export default Body;
