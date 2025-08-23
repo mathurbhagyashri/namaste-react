@@ -2,6 +2,7 @@ import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
  const  Body = () => {
   // local state variable - super powerful variable to create state
@@ -9,6 +10,7 @@ import { Link } from "react-router-dom";
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
 
   const [searchtext, setSearchText] = useState("");
+  const onlineStatus= useOnlineStatus();
 
   // whenever state variable update, react triggers a reconcillation cycle (re-renders the component)
   console.log("Body render");
@@ -42,54 +44,65 @@ import { Link } from "react-router-dom";
   if (listsOfRestaurants.length === 0) {
     return <Shimmer />;
   }
+
+  if(onlineStatus === false) return  (
+        <h1 style={{ textAlign: "center",marginTop:'1rem' }}>
+          OOPS! You are offline, Please connect to internet connection.
+        </h1>
+      );
   return (
-    <div className="body">
-      <div className="filter">
-        <div className="search">
-          <input
-            className="search-box"
-            type="text"
-            value={searchtext}
-            onChange={(e) => {
-              setSearchText(e.target.value);
-            }}
-          />
-          <button
-            onClick={() => {
-              // filter the restaurants card and update the ui
-              // searchtext
-              console.log("searchtext", searchtext);
-              const filteredRestaurants = listsOfRestaurants.filter((res) =>
-                res.info.name.toLowerCase().includes(searchtext.toLowerCase())
-              );
-              setFilteredRestaurant(filteredRestaurants);
-            }}
-          >
-            search
-          </button>
+        <div className="body">
+          <div className="filter">
+            <div className="search">
+              <input
+                className="search-box"
+                type="text"
+                value={searchtext}
+                onChange={(e) => {
+                  setSearchText(e.target.value);
+                }}
+              />
+              <button
+                onClick={() => {
+                  // filter the restaurants card and update the ui
+                  // searchtext
+                  console.log("searchtext", searchtext);
+                  const filteredRestaurants = listsOfRestaurants.filter((res) =>
+                    res.info.name
+                      .toLowerCase()
+                      .includes(searchtext.toLowerCase())
+                  );
+                  setFilteredRestaurant(filteredRestaurants);
+                }}
+              >
+                search
+              </button>
+            </div>
+            <button
+              className="filter-btn"
+              onClick={() => {
+                const filteredList = listsOfRestaurants.filter(
+                  (res) => res.info.avgRating > 4.3
+                );
+                console.log("filteredList89988", filteredList);
+                setFilteredRestaurant(filteredList);
+              }}
+            >
+              Top Rated Restaurants
+            </button>
+          </div>
+          <div className="res-container">
+            {filteredRestaurant.map((restaurant) => (
+              <Link
+                key={restaurant.info.id}
+                to={"/restaurants/" + restaurant.info.id}
+              >
+                <RestaurantCard resData={restaurant} />
+              </Link>
+            ))}
+          </div>
         </div>
-        <button
-          className="filter-btn"
-          onClick={() => {
-            const filteredList = listsOfRestaurants.filter(
-              (res) => res.info.avgRating > 4.3
-            );
-            console.log("filteredList89988", filteredList);
-            setFilteredRestaurant(filteredList);
-          }}
-        >
-          Top Rated Restaurants
-        </button>
-      </div>
-      <div className="res-container">
-        {filteredRestaurant.map((restaurant) => (
-          <Link key={restaurant.info.id} to={"/restaurants/" + restaurant.info.id}>
-            <RestaurantCard resData={restaurant} />
-          </Link>
-        ))}
-      </div>
-    </div>
-  );
+   );
 };
 
 export default Body;
