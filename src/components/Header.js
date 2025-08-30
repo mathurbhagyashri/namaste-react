@@ -12,50 +12,36 @@ export const Header = () => {
   }, [btnNameReact]);
 
   return (
-    <div className="header">
+    <div className="flex justify-between bg-slate-50 shadow-lg mt-2 sm:bg-yellow-100 lg:bg-red-200">
       <div className="logo-container">
-        <img className="logo" src={LOGO_URL} />
+        <img className="w-56 logo" src={LOGO_URL} />
       </div>
-      {/* <button
-        style={{
-          backgroundColor: onlineStatus ? "green" : "red",
-          color: "white", // optional, for better contrast
-          padding: "8px 12px",
-          border: "none",
-          borderRadius: "6px",
-          cursor: "pointer",
-          height: "2rem",
-          marginTop: "3rem",
-        }}
-      >
-        {onlineStatus ? "Online" : "Offline"}
-      </button> */}
-      <div className="nav-items">
-        <ul>
-          <li> Online Status: {onlineStatus ? "✅" : "🔴"}</li>
-          <li>
+      <div className="flex items-center">
+        <ul className="flex p-5 m-4">
+          <li className="mr-1"> Online Status: {onlineStatus ? "✅" : "🔴"}</li>
+          <li className="px-4">
             <Link to="/">Home</Link>
           </li>
-          <li>
+          <li className="px-4">
             <Link to="/about">About Us</Link>
           </li>
-          <li>
+          <li className="px-4">
             <Link to="contact">Contact Us</Link>
           </li>
-          <li>
+          <li className="px-4">
             <Link to="grocery">Grocery</Link>
           </li>
 
-          <li>
+          <li className="px-4">
             <Link to="cart">Cart</Link>
           </li>
           <button
+            className="rounded-md bg-green-500 p-4 shadow-md"
             onClick={() => {
               btnNameReact === "Login"
                 ? setbtnNameReact("Logout")
                 : setbtnNameReact("Login");
             }}
-            className="login-btn"
           >
             {btnNameReact}
           </button>

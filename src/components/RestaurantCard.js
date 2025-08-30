@@ -1,13 +1,6 @@
-
 const RestaurantCard = (props) => {
   const { resData } = props;
-  const {
-    name,
-    avgRating,
-    cuisines,
-    costForTwo,
-    sla,
-  } = resData?.info;
+  const { name, avgRating, cuisines, costForTwo, sla } = resData?.info;
 
   const fullImageId = resData?.info?.cloudinaryImageId;
 
@@ -21,22 +14,25 @@ const RestaurantCard = (props) => {
 
   // console.log("resData?.info", resData?.info.cloudinaryImageId);
 
-  const CDN_URL="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/";
+  const CDN_URL =
+    "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/";
 
   return (
-    <div className="res-card" style={{ backgroundColor: "#f0f0f0" }}>
+    <div
+      className="m-4 p-4 bg-gray-100 border w-[200px] h-[360px] rounded-md hover:cursor-pointer hover:bg-gray-200"
+    >
       {/* <img src={imageUrl} alt="Restaurant" />; */}
-       {/* <img
+      {/* <img
         // className="res-logo"
         alt="res-logo"
         src={CDN_URL + cloudinaryImageId}
       /> */}
-      <img 
-  src="https://freepngimg.com/thumb/pizza/2-pizza-png-image.png" 
-  alt="Swiggy Logo" 
-  style={{ width: '150px', height: 'auto' }} 
-/>
-      <h3>{name}</h3>
+      <img
+        src="https://freepngimg.com/thumb/pizza/2-pizza-png-image.png"
+        alt="Swiggy Logo"
+        style={{ width: "150px", height: "auto" }}
+      />
+      <h3 className="py-4 font-bold text-lg">{name}</h3>
       <h4>{cuisines.join(", ")}</h4>
       <h4>{avgRating} stars</h4>
       <h4>{costForTwo}</h4>
