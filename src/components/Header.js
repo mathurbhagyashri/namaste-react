@@ -12,7 +12,7 @@ export const Header = () => {
   }, [btnNameReact]);
 
   return (
-    <div className="flex justify-between bg-slate-50 shadow-lg mt-2 sm:bg-yellow-100 lg:bg-red-200">
+    <div className="flex justify-between bg-slate-50 shadow-lg mt-2 sm:bg-yellow-100 lg:bg-red-200 ">
       <div className="logo-container">
         <img className="w-56 logo" src={LOGO_URL} />
       </div>

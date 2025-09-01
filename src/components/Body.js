@@ -3,13 +3,19 @@ import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import { withPromotedLabel } from "./RestaurantCard";
 
 const Body = () => {
   // local state variable - super powerful variable to create state
   const [listsOfRestaurants, setListsOfRestaurants] = useState([]);
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
 
+  console.log("listsOfRestaurants24", listsOfRestaurants);
+
   const [searchtext, setSearchText] = useState("");
+
+  const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
+
   const onlineStatus = useOnlineStatus();
 
   // whenever state variable update, react triggers a reconcillation cycle (re-renders the component)
@@ -99,7 +105,12 @@ const Body = () => {
             key={restaurant.info.id}
             to={"/restaurants/" + restaurant.info.id}
           >
-            <RestaurantCard resData={restaurant} />
+            {/* if the restaurant is promoted type:"C" then add apromoted label to it  */}
+            {restaurant.info.type == "F" ? (
+              <RestaurantCardPromoted resData={restaurant} />
+            ) : (
+              <RestaurantCard resData={restaurant} />
+            )}
           </Link>
         ))}
       </div>
