@@ -2,10 +2,12 @@ import ItemList from "./ItemList";
 import { useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
-const RestaurantCategory = ({ data }) => {
-  const [showItemList, setShowItemList] = useState(false);
+const RestaurantCategory = ({ data,showItems,setShowIndex}) => {
+ 
+  // const [showItems,setShowItems]= useState(false);
+
   const handleClick = () => {
-    setShowItemList(!showItemList);
+     setShowIndex();
   };
   console.log("data", data);
   return (
@@ -16,7 +18,7 @@ const RestaurantCategory = ({ data }) => {
           <span className="font-bold text-lg text-black-100">
             {data.title} ({data.itemCards.length})
           </span>
-          {showItemList ? (
+          {showItems ? (
             <FaChevronUp className="text-lg text-gray-600 cursor-pointer " />
           ) : (
             <FaChevronDown className="text-lg text-gray-600 cursor-pointer" />
@@ -24,7 +26,7 @@ const RestaurantCategory = ({ data }) => {
         </div>
 
         {/* Accordian body */}
-        {showItemList && <ItemList items={data.itemCards} />}
+        {showItems && <ItemList items={data.itemCards} />}
       </div>
     </div>
   );
