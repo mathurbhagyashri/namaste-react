@@ -1,11 +1,14 @@
 import { CDN_URL } from "../utils/contants";
+import { useContext } from "react";
+import UserContext from "../utils/UserContext";
 
 const RestaurantCard = (props) => {
   const { resData } = props;
  const { name, avgRating, cuisines, costForTwo, sla,cloudinaryImageId } = resData?.info || {};
+ const {loggedInUser}= useContext(UserContext)
 
   return (
-    <div className="m-4 p-4 bg-gray-100 border w-[200px] h-[360px] rounded-md hover:cursor-pointer hover:bg-gray-200 hover:z-10 transform transition-transform duration-300 hover:scale-105">
+    <div className="m-4 p-4 bg-gray-100 border w-[200px] h-[420px] rounded-md hover:cursor-pointer hover:bg-gray-200 hover:z-10 transform transition-transform duration-300 hover:scale-105">
       <img
         src={CDN_URL + cloudinaryImageId}
         alt="Swiggy Logo"
@@ -16,6 +19,7 @@ const RestaurantCard = (props) => {
       <h4>{avgRating} stars</h4>
       <h4>{costForTwo}</h4>
       <h4>{sla.slaString}</h4>
+      <h4>User :{loggedInUser}</h4>
     </div>
   );
 };

@@ -3,13 +3,10 @@ import { useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 const RestaurantCategory = ({ data,showItems,setShowIndex}) => {
- 
-  // const [showItems,setShowItems]= useState(false);
 
   const handleClick = () => {
      setShowIndex();
   };
-  console.log("data", data);
   return (
     <div>
       {/* header */}

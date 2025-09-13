@@ -8,7 +8,8 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
+import UserContext from "./utils/UserContext";
 
 // chunking
 // lazy loading
@@ -21,18 +22,28 @@ const Grocery = lazy(() => import("./components/Grocery"));
 const About = lazy((()=> import('./components/About')))
 
 const AppLayout = () => {
-  // console.log("BODY", <Body />);
+  const [userName, setuserName] = useState();
+
+  // authentication
+  useEffect(() => {
+    // make aPI call send user name and password
+    const data = {
+      name: "Bhagyashri Mathur",
+    };
+    setuserName(data.name);
+  }, []);
 
   return (
-    <div className="app">
+    // Default value
+   <UserContext.Provider value={{loggedInUser: userName}}>
+   {/* // Bhagyashri in whole app*/}
+     <div className="app">
+     {/* Elon MUSK in header if header given userContext different  value={{loggedInUser: "Elon MUSK"}}*/} 
       <Header />
-      {/* if path=/ */}
-      {/* <Body /> */}
-      {/* if path is /about or /contact */}
-      {/* <About/> */}
-      <Outlet/>
+\      <Outlet />
       {/* <Footer /> */}
     </div>
+   </UserContext.Provider>
   );
 };
 

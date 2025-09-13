@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { LOGO_URL } from "../utils/contants";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 export const Header = () => {
   const [btnNameReact, setbtnNameReact] = useState("Login");
@@ -10,6 +11,10 @@ export const Header = () => {
   useEffect(() => {
     console.log("useEffect called");
   }, [btnNameReact]);
+
+    const {loggedInUser}= useContext(UserContext);
+    console.log({loggedInUser})
+
 
   return (
     <div className="flex justify-between bg-slate-50 shadow-lg mt-2 sm:bg-yellow-100 lg:bg-red-200 ">
@@ -36,15 +41,20 @@ export const Header = () => {
             <Link to="cart">Cart</Link>
           </li>
           <button
-            className="rounded-md bg-green-500 p-4 shadow-md"
+            // className="rounded-md bg-green-500 p-4 shadow-md"
             onClick={() => {
               btnNameReact === "Login"
                 ? setbtnNameReact("Logout")
                 : setbtnNameReact("Login");
+
             }}
           >
             {btnNameReact}
           </button>
+          
+          <li className="px-4 font-bold">
+            {loggedInUser}
+          </li>
         </ul>
       </div>
     </div>
