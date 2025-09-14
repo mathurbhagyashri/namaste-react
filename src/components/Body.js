@@ -1,9 +1,10 @@
 import RestaurantCard from "./RestaurantCard";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import { withPromotedLabel } from "./RestaurantCard";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   // local state variable - super powerful variable to create state
@@ -17,6 +18,7 @@ const Body = () => {
   const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
 
   const onlineStatus = useOnlineStatus();
+const {loggedInUser,setuserName}= useContext(UserContext)
 
   // whenever state variable update, react triggers a reconcillation cycle (re-renders the component)
   console.log("Body render");
@@ -97,6 +99,10 @@ const Body = () => {
           >
             Top Rated Restaurants
           </button>
+        </div>
+         <div className="m-4 p-4 flex items-center">
+         <label>Username: </label>
+         <input placeholder="username" className="border border-black p-2 ml-1" value={loggedInUser} onChange={(e)=> setuserName(e.target.value)}/>
         </div>
       </div>
       <div className="flex flex-wrap">

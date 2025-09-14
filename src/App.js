@@ -35,7 +35,7 @@ const AppLayout = () => {
 
   return (
     // Default value
-   <UserContext.Provider value={{loggedInUser: userName}}>
+   <UserContext.Provider value={{loggedInUser: userName,setuserName}}>
    {/* // Bhagyashri in whole app*/}
      <div className="app">
      {/* Elon MUSK in header if header given userContext different  value={{loggedInUser: "Elon MUSK"}}*/} 
