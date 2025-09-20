@@ -7,6 +7,9 @@ const RestaurantCategory = ({ data,showItems,setShowIndex}) => {
   const handleClick = () => {
      setShowIndex();
   };
+
+  console.log('data5',data);
+  
   return (
     <div>
       {/* header */}

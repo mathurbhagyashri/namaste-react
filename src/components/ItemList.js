@@ -4,12 +4,8 @@ import { useDispatch } from "react-redux";
 import { addItem } from "../utils/cartSlice";
 const ItemList = ({ items }) => {
 
-  // const [AddItems, setAddItems] = useState(false);
-
   const dispatch= useDispatch();
   const handleAddItem = (item) => {
-    // setAddItems(true);
-
     // dispatch an action
     dispatch(addItem(item))
      
@@ -46,22 +42,12 @@ const ItemList = ({ items }) => {
               alt={item?.card?.info?.name}
             />
             <div className="absolute inset-0 flex items-end justify-center pt-4">
-              {/* {!AddItems && ( */}
                 <button
                   className="p-2 shadow-lg text-green-600 font-bold bg-white rounded-md px-3 py-1 text-sm"
                   onClick={()=>handleAddItem(item)}
                 >
                   Add +
                 </button>
-              {/* )} */}
-
-              {/* {AddItems && (
-                <div className="flex p-2 shadow-lg text-green-600 font-bold bg-white rounded-md px-3 py-1 text-sm">
-                  <button>-</button>
-                  <p className="px-4">1</p>
-                  <button>+</button>
-                </div>
-              )} */}
             </div>
           </div>
         </div>
